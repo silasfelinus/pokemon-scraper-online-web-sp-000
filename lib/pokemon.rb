@@ -27,7 +27,7 @@ class Pokemon
       WHERE id = ?
       LIMIT 1
     SQL
-   db.execute(sql, id)
+   db.execute(sql, id)[0]
   end
 
 
