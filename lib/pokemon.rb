@@ -8,8 +8,14 @@ class Pokemon
     @db = pokemon[:db]
   end
 
-  def self.save(name, type, id)
-
+  def self.save(name, type, db)
+    sql = <<-SQL
+          INSERT INTO pokemon (name, type)
+          VALUES (?, ?)
+        SQL
+        db.execute(sql, name, type)
+        @id = db.execute("SELECT last_insert_rowid() FROM songs")[0][0]
+      end
   end
 
   def self.find(id)
