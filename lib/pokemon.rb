@@ -1,5 +1,8 @@
+require "pry"
+
 class Pokemon
   attr_accessor :id, :name, :type, :db
+
 
   def initialize(pokemon)
     @id = pokemon[:id]
@@ -14,9 +17,19 @@ class Pokemon
       VALUES (?, ?)
     SQL
     db.execute(sql, name, type)
-    @id = db.execute("SELECT last_insert_rowid() FROM songs")[0][0]
+    @id = db.execute("SELECT last_insert_rowid() FROM pokemon")[0][0]
   end
 
-  def self.find(id)
+  def self.find(id, db)
+    sql = <<-SQL
+      SELECT *
+      FROM pokemon
+      WHERE id = ?
+      LIMIT 1
+    SQL
+   db.execute(sql, id).map do |pokemon|
+    end.first
   end
+
+
 end
