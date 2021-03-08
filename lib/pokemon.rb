@@ -27,7 +27,8 @@ class Pokemon
       WHERE id = ?
       LIMIT 1
     SQL
-   db.execute(sql, id)
+   new_pokemon = db.execute(sql, id)
+   binding.pry
   end
 
 
